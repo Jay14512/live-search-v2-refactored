@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ort-Suche</title>
+    <link rel="stylesheet" href="bulma/css/bulma.min.css">
+    <link rel="stylesheet" href="css/search.css">
+    <script src="js/search.js" defer></script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Ort-Suche</h1>
+        </header>
+        <main>
+            <form action="">
+
+                <div class="field">
+                    <label class="label">Ort</label>
+                    <div class="control">
+                        <input class="input" id="ort" type="text" placeholder="Ort" autocomplete="off">
+                    </div>
+                    <div class="suggestions" id="suggestions">
+
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">PLZ</label>
+                    <div class="control">
+                        <input class="input" id="plz" type="text" placeholder="PLZ" readonly>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Längengrad</label>
+                    <div class="control">
+                        <input class="input" id="länge" type="text" placeholder="Längengrad" readonly>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Breitengrad</label>
+                    <div class="control">
+                        <input class="input" id="breite" type="text" placeholder="Breitengrad" readonly>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button class="button" id="coordinates">Koordinaten abfragen</button>
+                    <button class="button" id="resetFields" type="button">Zurücksetzen</button>
+                </div>
+            </form>
+        </main>
+    </div>
+    <footer>
+        &copy; Joshua Jason 2025
+    </footer>
+</body>
+
+</html>
