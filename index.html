@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ort-Suche</title>
+    <title>City Search</title>
     <link rel="stylesheet" href="bulma/css/bulma.min.css">
     <link rel="stylesheet" href="css/search.css">
     <script src="js/search.js" defer></script>
@@ -13,41 +13,41 @@
 <body>
     <div class="container">
         <header>
-            <h1>Ort-Suche</h1>
+            <h1>City Search</h1>
         </header>
         <main>
             <form action="">
 
                 <div class="field">
-                    <label class="label">Ort</label>
+                    <label class="label">City</label>
                     <div class="control">
-                        <input class="input" id="ort" type="text" placeholder="Ort" autocomplete="off">
+                        <input class="input" id="ort" type="text" placeholder="e.g. Vienna" autocomplete="off">
                     </div>
                     <div class="suggestions" id="suggestions">
 
                     </div>
                 </div>
                 <div class="field">
-                    <label class="label">PLZ</label>
+                    <label class="label">CAP</label>
                     <div class="control">
-                        <input class="input" id="plz" type="text" placeholder="PLZ" readonly>
+                        <input class="input" id="plz" type="text" placeholder="e.g. 1010" readonly>
                     </div>
                 </div>
                 <div class="field">
-                    <label class="label">Längengrad</label>
+                    <label class="label">Longitude</label>
                     <div class="control">
-                        <input class="input" id="länge" type="text" placeholder="Längengrad" readonly>
+                        <input class="input" id="länge" type="text" readonly>
                     </div>
                 </div>
                 <div class="field">
-                    <label class="label">Breitengrad</label>
+                    <label class="label">Latitude</label>
                     <div class="control">
-                        <input class="input" id="breite" type="text" placeholder="Breitengrad" readonly>
+                        <input class="input" id="breite" type="text" readonly>
                     </div>
                 </div>
                 <div class="buttons">
-                    <button class="button" id="coordinates">Koordinaten abfragen</button>
-                    <button class="button" id="resetFields" type="button">Zurücksetzen</button>
+                    <button class="button" id="coordinates">Get Coordinates</button>
+                    <button class="button" id="resetFields" type="button">Reset</button>
                 </div>
             </form>
         </main>

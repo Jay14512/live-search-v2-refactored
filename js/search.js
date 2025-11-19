@@ -1,4 +1,4 @@
-// DOM-Elemente holen: Ort-Eingabefeld und die Vorschlagsliste
+// Get DOM Elements: Field for City and dropdown
 const ort = document.getElementById("ort");
 const plz = document.getElementById("plz");
 const button = document.getElementById("coordinates");
@@ -24,16 +24,16 @@ function clearPlz() {
     plz.value = "";
 }
 
-// Sobald der Benutzer etwas ins Ort-Feld eingibt:
+// As soon as there's input from the user:
 ort.addEventListener("input", function (ev) {
     clearCoordinates();
     clearPlz();
-    // API-Daten holen (Ortsnamen + PLZs)
+    // Fetch API Data (City + CAPs)
     fetch(`http://wifi.1av.at/getplz.php?json`)
-        .then(response => response.json()) // JSON-Text in JS-Objekt umwandeln
+        .then(response => response.json()) // Convert JSON-Text in JS-Object 
 
         .then(data => {
-            //  Neues Array bauen: jedes Objekt enthält Ort + zugehörige PLZ
+            //  Build new Array: every Object has City + matching CAP
             const orteMitPlz = [];
             Object.entries(data).forEach(([plz, orteArray]) => {
                 orteArray.forEach(ort => {
@@ -41,27 +41,27 @@ ort.addEventListener("input", function (ev) {
                 });
             });
 
-            //  Zählen, wie oft jeder Ort vorkommt (z. B. Wien = 23×)
+            //  Count how many times one City exists (e.g. Vienna = 23×)
             const ortAnzahl = {};
             orteMitPlz.forEach(item => {
                 ortAnzahl[item.ort] = (ortAnzahl[item.ort] || 0) + 1;
             });
 
-            //  Eingabe vom Benutzer (z. B. "wi") in Kleinbuchstaben
+            //  Input from user (e.g. "wi") in lowercase
             const input = ev.target.value.toLowerCase();
 
-            //  Nur Orte filtern, die mit der Eingabe beginnen
+            // Filter only cities that match input
             const matching = orteMitPlz.filter(item =>
                 item.ort.toLowerCase().startsWith(input)
             );
 
-            //  Falls keine Treffer oder Eingabe leer: Liste leeren + abbrechen
+            //  If no match or dropdown empty: empty list and cancel
             if (matching.length === 0 || input === "") {
                 suggestions.innerHTML = "";
                 return;
             }
 
-            //  Funktion: Zeigt Ort + PLZ nur, wenn Ort mehrfach vorkommt
+            //  Function: Only shows City + CAP when City exists multiple times
             function formatOrt(item) {
                 if (ortAnzahl[item.ort] > 1) {
                     return `${item.ort} (${item.plz})`;
@@ -70,26 +70,26 @@ ort.addEventListener("input", function (ev) {
                 }
             }
 
-            //HTML für die Vorschlagsliste aufbauen, inkl. data-Attribute
+            //Build HTML for dropdown, inkl. data attributes
             let html = "";
             matching.forEach(item => {
                 html += `<li data-ort="${item.ort}" data-plz="${item.plz}">${formatOrt(item)}</li>`;
             });
 
-            //Vorschläge in die Seite einfügen
+            //Insert suggestions into page
             suggestions.innerHTML = `<ul>${html}</ul>`;
 
-            //Alle <li>-Einträge holen (sie wurden gerade erzeugt)
+            //Get all <li> entries
             const listItems = suggestions.querySelectorAll("li");
 
-            // Für jeden Vorschlag einen Klick-Event hinzufügen
+            // Add click event for every suggestion
             listItems.forEach(li => {
                 li.addEventListener("click", function (ev) {
-                    // - Ort ins Ort-Feld schreiben
+                    // - insert city in field
                     ort.value = li.dataset.ort;
-                    // - PLZ ins PLZ-Feld schreiben
+                    // - insert CAP in field
                     plz.value = li.dataset.plz;
-                    // - Vorschlagsliste ausblenden
+                    // - hide Dropdown 
                     suggestions.innerHTML = "";
 
 
@@ -97,11 +97,11 @@ ort.addEventListener("input", function (ev) {
             });
         })
 
-        // Fehlerbehandlung für API-Fehler
+        // Error handling for API errors
         .catch(error => console.error("Error: ", error));
 });
 
-//Hole die Web-API wenn der Button geklickt wurde
+//Get Web API when button has been clicked
 button.addEventListener("click", function (ev) {
     ev.preventDefault();
     if (plz.value === "") {
@@ -127,7 +127,7 @@ button.addEventListener("click", function (ev) {
     }
 });
 
-//Adde einen Event-Listener um das Vorschlagsfeld zuzumachen, wenn jemand außerhalb der Liste klickt
+//Add Event Listener to hide Dropdown when click outside of Dropdown list 
 document.addEventListener("click", function (ev) {
     if (!ort.contains(ev.target) && !suggestions.contains(ev.target)) {
         suggestions.innerHTML = "";

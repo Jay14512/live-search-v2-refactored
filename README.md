@@ -11,3 +11,4 @@
 
 ### General
 - Added a footer with copyright information
+- changed language (de->en)
