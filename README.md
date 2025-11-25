@@ -1,14 +1,17 @@
 ## Live City Search
 
+Refactored version of the original live city search application with improved layout and language consistency.
+
 **Status:** ✅ Done  
 **Version:** 2.0  
 **Technologies:** JavaScript, Bulma  
 
 ## Updates in Version 2.0
+
 ### Styling
-- Added `100vh` to the body for a cleaner layout  
-- Increased margins for better spacing  
+- cleaner layout
+- better spacing
 
 ### General
-- Added a footer with copyright information
-- changed language (de->en)
+- footer added
+- consistent English language
